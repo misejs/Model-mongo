@@ -1,0 +1,28 @@
+{
+  "name": "mise-model-mongo",
+  "version": "0.0.1",
+  "description": "Mise Model with mongodb methods",
+  "main": "lib/Model-mongo.js",
+  "dependencies": {
+    "mongo-wrapper": "^0.0.28",
+    "mise-model": "^0.0.1"
+  },
+  "scripts": {
+    "test": "mocha --recursive --reporter spec --bail --check-leaks test/lib/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/misejs/Model-mongo.git"
+  },
+  "keywords": [
+    "mise.js",
+    "mongodb",
+    "model"
+  ],
+  "author": "Jesse Ditson <jesse.ditson@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/misejs/Model-mongo/issues"
+  },
+  "homepage": "https://github.com/misejs/Model-mongo"
+}
