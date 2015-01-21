@@ -84,9 +84,9 @@ describe('Model-mongo',function(){
         });
     });
 
-    it('should save a thing to the db when calling .create',function(done){
+    it('should save a thing to the db when calling .save with a new item',function(done){
       var newThing = new Thing({name : 'buttbutt'});
-      newThing.create(function(err,item){
+      newThing.save(function(err,item){
         assert.ifError(err);
         assert.ok(item._id);
         Thing.all(function(err,list){
@@ -97,13 +97,13 @@ describe('Model-mongo',function(){
       });
     });
 
-    it('should update an item when calling .update',function(done){
+    it('should update an item when calling .save with an existing item',function(done){
       Thing.query({name : 'thing four'},function(err,list){
         assert.ifError(err);
         var thing = list[0];
         var nu = {name : 'not thing four anymore'};
         thing.name = nu.name;
-        thing.update(function(err,saved){
+        thing.save(function(err,saved){
           assert.ifError(err);
           assert.equal(saved.name,nu.name);
           Thing.query(nu,function(err,item){
@@ -115,10 +115,10 @@ describe('Model-mongo',function(){
       });
     });
 
-    it('should remove an item when calling .delete',function(done){
+    it('should remove an item when calling .destroy',function(done){
       Thing.query({name : 'thing two'},function(err,list){
         assert.ifError(err);
-        list[0].delete(function(err,response){
+        list[0].destroy(function(err,response){
           assert.ifError(err);
           Thing.query({name : 'thing two'},function(err,items){
             assert.ifError(err);
