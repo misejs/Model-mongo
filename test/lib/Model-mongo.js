@@ -1,6 +1,6 @@
 var assert = require('assert');
-var Model = require('../../lib/Model-mongo');
-var MiseModel = require('mise-model');
+var extend = require('../../lib/Model-mongo');
+var Model = require('mise-model');
 var mongodb = require('mongo-wrapper');
 
 var dbConfig = {
@@ -37,19 +37,20 @@ describe('Model-mongo',function(){
     });
 
     // set up our data
-    Thing = new Model('Thing',{
+    var OGModel = new Model('Thing',{
       _id : {
         type : String
       },
       name : {
         type : String
       }
-    },'things',dbConfig);
+    },'things');
+    Thing = extend(OGModel,dbConfig);
     model = new Thing({name : 'pork'});
   });
 
   it('should inherit the prototype of mise Model',function(){
-    var miseModel = new MiseModel('Thing',{},'things');
+    var miseModel = new Model('Thing',{},'things');
     Object.keys(miseModel.prototype).forEach(function(prop){
       assert.ok(Thing.prototype[prop]);
     });
