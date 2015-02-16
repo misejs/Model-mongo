@@ -21,6 +21,7 @@ var MyModel = require('../lib/models/MyModel.js');
 var extend = require('mise-model-mongo');
 
 var ExtendedModel = extend(MyModel,{
+  idKey : 'customIDKey',
   username: 'admin_user',
   password: 'secret',
   hosts: [
@@ -51,6 +52,12 @@ module.exports = ExtendedModel;
 API
 ---
 
+This extension has the following configuration options:
+
+- All options that can be passed to [mongo-wrapper](https://github.com/dmcaulay/mongo-wrapper).
+
+- An `idKey` option, that will override the standard `_id` field as the field that consumers of this module will use to identify these objects. Note that this will not change the `.one` method's default query behavior or index this field.
+
 This extension adds the following methods:
 
 - Model.all(callback)
@@ -61,9 +68,11 @@ This extension adds the following methods:
 
 - Model.one(id,callback)
 
-  This class method will query the mongodb collection for an item with the `_id` of `id`.
+  When passed a non-object, this class method will query the mongodb collection for an item with the `_id` of `id`.
 
-  The callback has the signature `(err,model)`, where model is a model of this type with that `_id`.
+  When passed an object, this class method will query the mongodb collection for an item matching the query. For instance, `{username : 'someuser'}`.
+
+  The callback has the signature `(err,model)`, where model is a model of this type with that `_id` or the first object matching the passed query.
 
 - Model.prototype.save(callback)
 
@@ -78,7 +87,7 @@ This extension adds the following methods:
 - Model.destroy(id,callback)
 
   This class method will perform a `remove` query on this collection for an item with the specified id.
-  
+
   The callback has the signature `(err,count)`, where count is the number of removed documents. (Either 1 or 0 in the case of a failure or non-matched `_id`.).
 
 - Model.prototype.destroy(callback)
