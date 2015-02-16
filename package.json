@@ -1,6 +1,6 @@
 {
   "name": "mise-model-mongo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Mise Model with mongodb methods",
   "main": "lib/Model-mongo.js",
   "dependencies": {
