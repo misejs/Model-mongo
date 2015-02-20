@@ -1,11 +1,13 @@
 {
   "name": "mise-model-mongo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Mise Model with mongodb methods",
   "main": "lib/Model-mongo.js",
   "dependencies": {
-    "mongo-wrapper": "~0.0.28",
-    "mise-model": "~0.0.3"
+    "mongo-wrapper": "~0.0.28"
+  },
+  "devDependencies": {
+    "mise-model": "~0.0.4"
   },
   "scripts": {
     "test": "mocha --recursive --reporter spec --bail --check-leaks test/lib/"
